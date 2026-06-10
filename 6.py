@@ -48,3 +48,56 @@ for i in products.values():
 print()
 for key,value in products.items():
     print(key, value)
+
+
+# --------------SET МНОЖЕСТВА--------------
+
+# numbers = {1,2,3,4,5,6,7,8,9,9,9,9,9,9,9,9,9}
+# print(numbers[2])
+
+# data = {{1,2}, {3,4}}
+
+# numbers = {1,2,3,4,5,6,7,8,9,9,9,9,9,9,9,9,9}
+# for i in numbers:
+#     if i == 2:
+#         print(i)
+
+# numbers = [1,2,2,2,3,4,5,5,6,7,8,9,9]
+# unique_numbers = set(numbers)
+# new_numbers = list(unique_numbers)
+# print(new_numbers)
+
+# skills = {"Python", "HTML"}
+# skills.add("CSS")
+# print(skills)
+
+# update()
+# skills = {"Python", "HTML"}
+# skills.update(["CSS", "JS", "REACT"])
+# print(skills)
+
+# remove()
+# skills = {"Python", "HTML"}
+# skills.remove("qwerty")
+# print(skills)
+
+# discard()
+# skills = {"Python", "HTML"}
+# skills.discard("qwerty")
+# print(skills)
+
+# numbers = {1,2,3,4,5,6,7,8,9,9,9,9,9,9,9,9,9}
+# item = numbers.pop()
+# print(item)
+# print(numbers)
+
+# clear()
+
+# Операции с множеством
+group_a = {1,2,3,4,8}
+group_b = {4,5,6,7,8}
+# result = group_a & group_b
+# print(result)
+result = group_a | group_b
+result = group_a.union(group_b)
+print(result) 
