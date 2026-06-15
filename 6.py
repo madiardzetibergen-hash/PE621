@@ -94,10 +94,10 @@ for key,value in products.items():
 # clear()
 
 # Операции с множеством
-group_a = {1,2,3,4,8}
-group_b = {4,5,6,7,8}
-# result = group_a & group_b
-# print(result)
-result = group_a | group_b
-result = group_a.union(group_b)
-print(result) 
+# group_a = {1,2,3,4,8}
+# group_b = {4,5,6,7,8}
+# # result = group_a & group_b
+# # print(result)
+# result = group_a | group_b
+# result = group_a.union(group_b)
+# print(result) 
