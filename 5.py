@@ -125,10 +125,10 @@
 # print(names) 
 
 # join()
-words = ["Python", "is", "cool"]
+# words = ["Python", "is", "cool"]
 
-text = " ".join(words) 
-print(text)
+# text = " ".join(words) 
+# print(text)
 
 # isdigit
 # text = ""
