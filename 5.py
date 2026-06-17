@@ -99,7 +99,7 @@
 # word = "hello world"
 # print(word.capitalize())
 
-# strip(), lstrip(), rstrip()
+export # strip(), lstrip(), rstrip()
 # text = "        hello         "
 # print(text.strip())
 
