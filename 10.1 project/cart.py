@@ -39,3 +39,30 @@ def show_cart():
             f"{item_total} тг"
         )
     print(f"Итого: {total} тг")
+
+# 3. Функция подсчета суммы
+
+def calculate_total():
+    total = 0 
+
+    for product_id, quantity in cart.items():
+        product = find_product_by_id(product_id)
+        total += product["price"] * quantity
+
+    return total
+
+# 4. Функция оформления заказа с вложенной функцией
+
+def check_the_order():
+    def is_cart_empty():
+        return len(cart) == 0
+    
+    if is_cart_empty():
+        print("Нельзя оформить заказ. Корзина пустая")
+        return
+    
+    total = calculate_total()
+    print("===== Оформление заказа =====")
+    print(f"Сумма заказа: {total}")
+    print("Спасибо за покупку")
+    cart.clear()
