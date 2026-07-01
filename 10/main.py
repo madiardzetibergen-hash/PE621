@@ -4,3 +4,4 @@
 
 # u.sayhello()
 # u.total(4,5)
+utils.qwerty()

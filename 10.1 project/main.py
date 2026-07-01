@@ -11,11 +11,13 @@ def show_menu():
     print("5. Проверить заказ")
     print("0. Выйти")
 
+
+
 def main():
     while True:
         show_menu()
 
-        choice = input("Выберите действие")
+        choice = input("Выберите действие: ")
         if choice == "1":
             show_products()
         elif choice == "2":
@@ -46,7 +48,7 @@ def main():
             break
         else:
             print("Ошибка: такого пункта нет")
-            print_line
+            print_line()
 
 if __name__ == "__main__":
     main()

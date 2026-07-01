@@ -36,7 +36,7 @@ def show_products():
     print("===== КАТАЛОГ ТОВАРОВ =====")
     for product in products:
         print(
-            f"{product["id"]}. {product["name"]} | "
+            f"{product['id']}. {product["name"]} | "
             f"{product["price"]} тг | "
             f"{product["category"]}"
         )

@@ -29,13 +29,13 @@ def show_cart():
 
     total = 0
 
-    for product_id, quanity in cart.items():
+    for product_id, quantity in cart.items():
         product = find_product_by_id(product_id)
-        item_total = product["price"] * quanity
+        item_total = product["price"] * quantity
 
         print(
             f"{product["name"]} | "
-            f"{quanity} шт | "
+            f"{quantity} шт | "
             f"{item_total} тг"
         )
     print(f"Итого: {total} тг")
