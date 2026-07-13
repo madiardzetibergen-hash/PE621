@@ -61,21 +61,71 @@ class PaperBook(Product):
         self.quantity -= 1
         return True
     
+# paper_book = PaperBook(
+#     1,
+#     "Python для начинающих",
+#     "Иван Иванов",
+#     6500,
+#     350,
+#     3
+# )
+# paper_book.get_info()
+# print(paper_book.price)
+# print(paper_book.buy())
+
+# Id 2
+# Название чистый код
+# автор робер Мартин
+# цена 10500
+# страниц 500
+# количество 2
+
+class EBook(Product):
+    def __init__(self,product_id,title,author,price,file_format,file_size):
+        super().__init__(product_id,title,author,price)
+        self.file_format = file_format
+        self.file_size = file_size
+
+    def get_info(self):
+        print(f"ID: {self.product_id}")
+        print(f"Электронная книга: {self.title}")
+        print(f"Автор: {self.author}")
+        print(f"Цена: {self.price} тенге")
+        print(f"Формат файла: {self.file_format}")
+        print(f"Размер файла: {self.file_size} МБ")
+
+    def is_available(self):
+        return True
+    
+    def buy(self):
+        return True
+    
 paper_book = PaperBook(
     1,
     "Python для начинающих",
-    "Иван Иванов",
+    "Алексей Иванов",
     6500,
     350,
-    3
+    2
 )
-paper_book.get_info()
-print(paper_book.price)
-print(paper_book.buy())
+ebook = EBook(
+    2,
+    "Основы ООП",
+    "Мария Петрова",
+    3500,
+    "PDF",
+    12
+)
+products = [paper_book, ebook]
+for product in products:
+    product.get_info()
+    print(product.is_available())
+    print()
 
-Id 2
-Название чистый код
-автор робер Мартин
-цена 10500
-страниц 500
-количество 2
+paper_book.buy()
+
+for product in products:
+    product.get_info()
+    print(product.is_available())
+    print()
+
