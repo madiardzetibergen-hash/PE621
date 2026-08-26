@@ -1,0 +1,109 @@
+body{
+    padding: 0;
+    margin: 0;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: rgb(237, 235, 226);
+}
+.logo img{
+    width: 100px;
+}
+.header{
+   
+    display:flex;
+    align-items: center;
+    padding: 20px;
+    margin: 10px;
+    justify-content:space-evenly;
+
+}
+.right-hero-btn button{
+    padding: 10px 20px;
+    border-radius: 18px;
+    background-color: #023BAC;
+    color: white;
+    border: none;
+    font-size: 18px;
+}
+.hyperlinks{
+    display: flex;
+    gap: 40px;
+}
+.hyperlinks a{
+    text-decoration: none;
+    color: rgb(39, 39, 39);
+    font-weight: 500;
+}
+.right-hero{
+    display: flex;
+    gap: 40px;
+}
+.icons{
+    display: flex;
+    gap: 20px;
+}
+.icons img{
+    width: 30px;
+}
+.hero{
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    /* background-color: #023BAC; */
+    
+}
+.hero-leftside h1{
+    font-size: 40px;
+}
+.hero-leftside h2{
+    color: rgb(95, 95, 95);
+    font-size: 20px;
+}
+.hero-leftside p{
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    color: #023BAC;
+}
+.hero-rightside img{
+    width: 500px;
+    height: 500px;
+    border-radius: 16px;
+}
+.hero-leftside-text-h1-h2 {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.hero-leftside-text-h1-h2 h2{
+    position: relative;
+    bottom: 25px;
+    font-weight: 400;
+}
+.btn-primary{
+    padding: 10px 20px;
+    border-radius: 18px;
+    background-color: #023BAC;
+    color: white;
+    border: none;
+    font-size: 18px;
+}
+.btn-secondary{
+    padding: 10px 20px;
+    border-radius: 18px;
+    background-color: transparent;
+    color: #023BAC;
+    border: 2px solid #023BAC;
+    font-size: 18px;
+}
+.benefints{
+    position: relative;
+    bottom: 25px;
+}
+.benefins p{
+    font-weight: 500;
+}
+.hero-leftside-btns{
+    position: relative;
+    bottom: 20px;
+}

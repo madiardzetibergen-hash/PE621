@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление товарами</title>
+    <style>
+        :root {
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --danger-color: #ef4444;
+            --danger-hover: #dc2626;
+            --text-color: #1f2937;
+            --border-color: #e5e7eb;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            margin-bottom: 24px;
+            font-size: 28px;
+        }
+
+        /* Форма добавления */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 32px;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            margin-bottom: 16px;
+            font-size: 20px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 12px;
+            align-items: end;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        input {
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+        }
+
+        button {
+            padding: 10px 18px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        button.btn-danger {
+            background-color: var(--danger-color);
+        }
+
+        button.btn-danger:hover {
+            background-color: var(--danger-hover);
+        }
+
+        /* Таблица товаров */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f8fafc;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* Уведомления */
+        .toast {
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .toast.error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            display: block;
+        }
+
+        .toast.success {
+            background-color: #dcfce7;
+            color: #166534;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📦 Управление складским учетом</h1>
+
+    <div id="toast" class="toast"></div>
+
+    <!-- Форма создания товара -->
+    <div class="card">
+        <h2>Добавить новый товар</h2>
+        <form id="create-form" class="form-grid">
+            <div class="form-group">
+                <label for="name">Название</label>
+                <input type="text" id="name" placeholder="Например: Клавиатура" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Цена (₸)</label>
+                <input type="number" id="price" min="0" step="100" placeholder="0" required>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Кол-во</label>
+                <input type="number" id="quantity" min="0" placeholder="0" required>
+            </div>
+            <button type="submit">Добавить</button>
+        </form>
+    </div>
+
+    <!-- Список товаров -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Наименование</th>
+                <th>Цена</th>
+                <th>Остаток</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody id="products-list">
+            <!-- Заполняется динамически через JS -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    const API_URL = "http://127.0.0.1:5000/api/products";
+
+    // Элементы DOM
+    const productsList = document.getElementById("products-list");
+    const createForm = document.getElementById("create-form");
+    const toast = document.getElementById("toast");
+
+    // Вспомогательная функция для всплывающих сообщений
+    function showNotification(message, isError = false) {
+        toast.textContent = message;
+        toast.className = `toast ${isError ? 'error' : 'success'}`;
+        setTimeout(() => {
+            toast.className = 'toast';
+        }, 3000);
+    }
+
+    // 1. GET: Загрузить список всех товаров
+    async function fetchProducts() {
+        try {
+            const response = await fetch(API_URL);
+            if (!response.ok) throw new Error("Не удалось загрузить товары");
+            
+            const data = await response.json();
+            renderProducts(data.products);
+        } catch (error) {
+            showNotification(error.message, true);
+        }
+    }
+
+    // Рендер строк таблицы
+    function renderProducts(products) {
+        productsList.innerHTML = "";
+        
+        products.forEach(product => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td><strong>#${product.id}</strong></td>
+                <td>${product.name}</td>
+                <td>${product.price.toLocaleString()} ₸</td>
+                <td>${product.quantity} шт.</td>
+                <td class="actions">
+                    <button class="btn-danger" onclick="deleteProduct(${product.id})">Удалить</button>
+                </td>
+            `;
+            productsList.appendChild(tr);
+        });
+    }
+
+    // 2. POST: Создать новый товар
+    createForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const newProduct = {
+            name: document.getElementById("name").value,
+            price: Number(document.getElementById("price").value),
+            quantity: Number(document.getElementById("quantity").value)
+        };
+
+        try {
+            const response = await fetch(API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(newProduct)
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.error || "Ошибка при создании товара");
+            }
+
+            showNotification("Товар успешно добавлен!");
+            createForm.reset();
+            fetchProducts(); // Обновляем список
+        } catch (error) {
+            showNotification(error.message, true);
+        }
+    });
+
+    // 3. DELETE: Удалить товар
+    async function deleteProduct(id) {
+        if (!confirm(`Удалить товар #${id}?`)) return;
+
+        try {
+            const response = await fetch(`${API_URL}/${id}`, {
+                method: "DELETE"
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.error || "Ошибка при удалении товара");
+            }
+
+            showNotification("Товар удален!");
+            fetchProducts(); // Обновляем список
+        } catch (error) {
+            showNotification(error.message, true);
+        }
+    }
+
+    // Первичная загрузка при открытии страницы
+    fetchProducts();
+</script>
+
+</body>
+</html>
