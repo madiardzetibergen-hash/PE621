@@ -1,0 +1,372 @@
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+    /* Background */
+    --color-bg: #F3F0E8;
+    --color-bg-secondary: #E9E4D9;
+    --color-surface: #F8F5ED;
+    --color-surface-light: #FAF8F2;
+
+    /* Text */
+    --color-text: #29251F;
+    --color-text-dark: #191714;
+    --color-text-muted: #6F695F;
+
+    /* Borders */
+    --color-border: #CFC8BA;
+
+    /* Accent */
+    --color-accent: #A6532B;
+    --color-accent-dark: #7F3E22;
+
+    /* Brown */
+    --color-brown: #59483A;
+    --color-brown-dark: #30271F;
+
+    /* Beige */
+    --color-beige: #DDD5C5;
+
+    /* White */
+    --color-white: #FFFFFF;
+
+    /* Fonts */
+    --font-display: "DM Serif Display", Georgia, serif;
+    --font-body: "Manrope", Arial, sans-serif;
+
+    /* Layout */
+    --container-width: 1240px;
+    --container-padding: 32px;
+
+    /* Radius */
+    --radius-small: 2px;
+    --radius-medium: 4px;
+    --radius-large: 8px;
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.35s ease;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+
+    background-color: var(--color-bg);
+    color: var(--color-text);
+
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container {
+    width: min(
+        100% - (var(--container-padding) * 2),
+        var(--container-width)
+    );
+
+    margin-inline: auto;
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.section {
+    padding: 100px 0;
+}
+
+.section-label {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: var(--color-text-muted);
+
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 46px);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+}
+
+.section-description {
+    max-width: 450px;
+
+    margin-top: 12px;
+
+    color: var(--color-text-muted);
+
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.section-heading-centered {
+    margin-bottom: 50px;
+
+    text-align: center;
+}
+
+.section-heading-centered .section-label {
+    margin-bottom: 8px;
+}
+
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 40px;
+}
+
+.section-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    flex-shrink: 0;
+
+    color: var(--color-text);
+
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+
+    transition:
+        color var(--transition-fast),
+        gap var(--transition-fast);
+}
+
+.section-link:hover {
+    color: var(--color-accent);
+    gap: 12px;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    min-height: 46px;
+
+    padding: 0 22px;
+
+    border: 1px solid transparent;
+
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+
+    transition:
+        background-color var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast);
+}
+
+.button:hover {
+    transform: translateY(-1px);
+}
+
+.button--primary {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+}
+
+.button--primary:hover {
+    background-color: var(--color-accent-dark);
+}
+
+.button--light {
+    background-color: var(--color-surface-light);
+    color: var(--color-text-dark);
+}
+
+.button--light:hover {
+    background-color: var(--color-white);
+}
+
+
+/* =========================================================
+   TEXT LINK
+========================================================= */
+
+.text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    color: var(--color-accent);
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+
+    transition:
+        color var(--transition-fast),
+        gap var(--transition-fast);
+}
+
+.text-link:hover {
+    color: var(--color-accent-dark);
+    gap: 10px;
+}
+
+
+/* =========================================================
+   VISUALLY HIDDEN
+========================================================= */
+
+.visually-hidden {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    padding: 0;
+    margin: -1px;
+
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+}
+
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    :root {
+        --container-padding: 22px;
+    }
+
+    .section {
+        padding: 75px 0;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    :root {
+        --container-padding: 16px;
+    }
+
+    body {
+        font-size: 13px;
+    }
+
+    .section {
+        padding: 60px 0;
+    }
+
+    .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+
+        margin-bottom: 30px;
+    }
+
+    .section-title {
+        font-size: 34px;
+    }
+
+}
