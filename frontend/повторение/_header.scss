@@ -1,0 +1,17 @@
+header{
+    display: flex;
+    justify-content: space-evenly;
+
+    nav a{
+        text-decoration: none;
+        font-size: 16px;
+        color: black;
+    }
+    nav{
+        display: flex;
+        gap: 24px;
+    }
+    .logo{
+        font-size: 24px;
+    }
+}
